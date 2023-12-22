@@ -4,7 +4,7 @@ type AccountData = {
   username: string;
   password: string;
 };
-console.log("password");
+
 type AccountFormProps = AccountData & {
   updateFields: (fields: Partial<AccountData>) => void;
 };
