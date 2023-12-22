@@ -3,8 +3,6 @@ import { AccountForm } from "./Components/AccountForm";
 import { AddressForm } from "./Components/AddressForm";
 import { UserForm } from "./Components/UserForm";
 import { useMultistepForm } from "./useMultiStepForm";
-import * as Yup from "yup";
-import YupPassword from "yup-password";
 
 type FormData = {
   firstName: string;
@@ -47,11 +45,8 @@ function App() {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!isLastStep) return next();
-    const requiredField = () => Yup.string().required("required");
-    const passwordField = <AddressForm {...data} updateFields={updateFields} />;
 
-    alert("Your registration is successful" + "ssss" + passwordField);
+    alert("Your registration is successful");
   }
   return (
     <div
