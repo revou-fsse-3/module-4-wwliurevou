@@ -36,6 +36,7 @@ function App() {
       return { ...prev, ...fields };
     });
   }
+  // eslint-disable-next-line
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <UserForm {...data} updateFields={updateFields} />,
@@ -80,6 +81,7 @@ function App() {
               Back
             </button>
           )}
+
           <button type="submit">{isLastStep ? "Finish" : "Next"}</button>
         </div>
       </form>
