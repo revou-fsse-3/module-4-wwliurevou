@@ -2,7 +2,7 @@ import { FormWrapper } from "./FormWrapper";
 
 type AccountData = {
   username: string;
-  password: string;
+  password: any;
 };
 
 type AccountFormProps = AccountData & {
@@ -16,7 +16,7 @@ export function AccountForm({
 }: AccountFormProps) {
   return (
     <FormWrapper title="Account Creation">
-      <label>username</label>
+      <label className="text-orange-500">username</label>
       <input
         autoFocus
         required
@@ -24,11 +24,12 @@ export function AccountForm({
         value={username}
         onChange={(e) => updateFields({ username: e.target.value })}
       />
-      <label>Password</label>
+      <label className="text-orange-500">Password</label>
       <input
         required
         type="password"
         value={password}
+        autoComplete="on"
         onChange={(e) => updateFields({ password: e.target.value })}
       />
     </FormWrapper>

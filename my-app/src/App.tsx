@@ -1,8 +1,10 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { AccountForm } from "./Components/AccountForm";
 import { AddressForm } from "./Components/AddressForm";
 import { UserForm } from "./Components/UserForm";
 import { useMultistepForm } from "./useMultiStepForm";
+import { schema } from "./Components/passwordschema";
+import "./App.css";
 
 type FormData = {
   firstName: string;
@@ -14,7 +16,7 @@ type FormData = {
   state: string;
   zip: string;
   username: string;
-  password: string;
+  password: any;
 };
 const INITIAL_DATA: FormData = {
   firstName: "",
@@ -36,7 +38,6 @@ function App() {
       return { ...prev, ...fields };
     });
   }
-  // eslint-disable-next-line
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <UserForm {...data} updateFields={updateFields} />,
@@ -44,11 +45,24 @@ function App() {
       <AccountForm {...data} updateFields={updateFields} />,
     ]);
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: any) {
     e.preventDefault();
 
-    alert("Your registration is successful");
+    if (isLastStep === false) {
+      return next();
+    } else {
+      const isValid = await schema.isValid({ password: data.password });
+      if (isValid === true) {
+        return alert(
+          "Hi " + data.firstName + " ,Your registration is successful!!"
+        );
+      }
+      return alert(
+        "Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number"
+      );
+    }
   }
+
   return (
     <div
       className="Box"
@@ -77,7 +91,11 @@ function App() {
           }}
         >
           {!isFirstStep && (
-            <button type="button" onClick={back}>
+            <button
+              className={`font-medium text-[#9699ab] select-none cursor-pointer transition duration-100 hover:text-[#02295a]`}
+              type="button"
+              onClick={back}
+            >
               Back
             </button>
           )}

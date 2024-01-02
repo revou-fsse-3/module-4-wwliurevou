@@ -1,4 +1,5 @@
 import { FormWrapper } from "./FormWrapper";
+
 type UserData = {
   firstName: string;
   lastName: string;
@@ -19,7 +20,7 @@ export function UserForm({
 }: userFormProps) {
   return (
     <FormWrapper title="User Details">
-      <label>First Name</label>
+      <label className=" text-purple-500">First Name</label>
       <input
         autoFocus
         placeholder="e.g. John"
@@ -28,7 +29,9 @@ export function UserForm({
         value={firstName}
         onChange={(e) => updateFields({ firstName: e.target.value })}
       />
-      <label>Last Name</label>
+      <label className=" text-purple-500">
+        Last Name
+      </label>
       <input
         required
         placeholder="e.g. Doe"
@@ -36,14 +39,14 @@ export function UserForm({
         value={lastName}
         onChange={(e) => updateFields({ lastName: e.target.value })}
       />
-      <label>Email</label>
+      <label className=" text-purple-500">Email</label>
       <input
         required
         type="email"
         value={email}
         onChange={(e) => updateFields({ email: e.target.value })}
       />
-      <label>Date of Birth</label>
+      <label className=" text-purple-500">Date of Birth</label>
       <input
         required
         type="Date"
